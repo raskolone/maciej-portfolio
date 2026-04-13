@@ -98,7 +98,7 @@ export default function AboutSection() {
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2 pt-2">
-              {["Python", "React", "AI Tools", "EdTech", "ADHD-friendly design"].map((tag) => (
+              {["Python", "React", "AI Tools", "SQL", "Supabase", "EdTech", "ADHD-friendly design"].map((tag) => (
                 <span key={tag} className="tech-tag">{tag}</span>
               ))}
               {["English C2", "Teaching", "Curriculum Design"].map((tag) => (

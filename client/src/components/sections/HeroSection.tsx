@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/hero-bg-mtDmSPGVgnxQFHorxDvzAK.webp";
-const AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/roadrunner-avatar-PV3DoV8ZjAjYM9x3BXASaT.webp";
+const AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-avatar_f2b22a3b.png";
 
 const roles = {
   pl: ["Lektor języka angielskiego", "Twórca aplikacji EdTech", "Entuzjasta AI"],
@@ -78,7 +78,7 @@ export default function HeroSection() {
           <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-primary/40 glow-green">
             <img
               src={AVATAR}
-              alt="Maciej — avatar placeholder"
+              alt="Maciej Wyrozumski"
               className="w-full h-full object-cover"
             />
           </div>
@@ -98,7 +98,7 @@ export default function HeroSection() {
             className="text-lg md:text-xl text-muted-foreground mt-2 tracking-[0.2em] uppercase"
             style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}
           >
-            Kowalski
+            Wyrozumski
           </p>
         </div>
 

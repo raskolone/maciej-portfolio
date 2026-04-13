@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const itSkills = [
   { name: "Python", level: 55, note: { pl: "Rozumiem składnię, buduję z AI", en: "Understand syntax, build with AI" } },
   { name: "JavaScript / React", level: 45, note: { pl: "Ogólne rozumienie", en: "General understanding" } },
+  { name: "SQL / Supabase", level: 50, note: { pl: "Budowanie baz danych z AI, obsługa Supabase", en: "Building databases with AI, Supabase management" } },
   { name: "AI-assisted coding", level: 85, note: { pl: "Cursor, Claude, GPT-4", en: "Cursor, Claude, GPT-4" } },
   { name: "Prompt Engineering", level: 80, note: { pl: "Projektowanie promptów", en: "Prompt design & optimization" } },
   { name: "No-code / Low-code", level: 75, note: { pl: "Manus, Bolt, Lovable", en: "Manus, Bolt, Lovable" } },

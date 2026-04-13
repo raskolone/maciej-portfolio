@@ -15,7 +15,7 @@ export default function Footer() {
           className="text-xs text-muted-foreground"
           style={{ fontFamily: "'Fira Code', monospace" }}
         >
-          © 2025 Maciej Kowalski. {t("Wszelkie prawa zastrzeżone.", "All rights reserved.")}
+          © 2025 Maciej Wyrozumski. {t("Wszelkie prawa zastrzeżone.", "All rights reserved.")}
         </p>
         <p
           className="text-xs text-muted-foreground/50"
