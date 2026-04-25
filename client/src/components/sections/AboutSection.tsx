@@ -77,18 +77,29 @@ export default function AboutSection() {
               ))}
             </div>
 
-            {/* Photo */}
-            <div
-              className="reveal-about mt-8 hidden lg:block"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
-            >
-              <div className="relative">
+
+          </div>
+
+          {/* Right column: bio text */}
+          <div className="lg:col-span-8">
+            <div className="space-y-6">
+              {/* Photo inline — float right, rozmiar jednego akapitu */}
+              <div
+                className="reveal-about float-right ml-6 mb-4 hidden sm:block"
+                style={{
+                  opacity: 0,
+                  transform: "translateY(16px)",
+                  transition: "opacity 0.5s ease, transform 0.5s ease",
+                  width: "160px",
+                  flexShrink: 0,
+                }}
+              >
                 <div
                   className="overflow-hidden"
                   style={{
                     borderRadius: "2px",
-                    boxShadow: "0 0 40px oklch(0.65 0.2 145 / 0.15), 0 8px 32px rgba(0,0,0,0.5)",
-                    border: "1px solid oklch(0.65 0.2 145 / 0.2)",
+                    boxShadow: "0 0 24px oklch(0.65 0.2 145 / 0.18), 0 4px 16px rgba(0,0,0,0.5)",
+                    border: "1px solid oklch(0.65 0.2 145 / 0.25)",
                   }}
                 >
                   <img
@@ -98,18 +109,8 @@ export default function AboutSection() {
                     style={{ display: "block" }}
                   />
                 </div>
-                {/* Subtle green accent line */}
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-0.5"
-                  style={{ background: "linear-gradient(90deg, transparent, oklch(0.65 0.2 145), transparent)" }}
-                />
               </div>
-            </div>
-          </div>
 
-          {/* Right column: bio text */}
-          <div className="lg:col-span-8">
-            <div className="space-y-6">
               <div
                 className="reveal-about"
                 style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
