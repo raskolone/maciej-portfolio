@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -18,6 +19,10 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    document.title = "Maciej Wyrozumski - English Coach | CribroEnglish";
+  }, []);
+
   return (
     <ErrorBoundary>
       <ThemeProvider
