@@ -38,7 +38,7 @@ export default function ContactSection() {
     }
     setSubmitting(true);
     try {
-      const res = await fetch("https://formspree.io/f/xzzbnqwk", {
+      const res = await fetch("https://formspree.io/f/mbdqbjbk", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
