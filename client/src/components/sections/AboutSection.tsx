@@ -1,109 +1,171 @@
 /* =============================================================
-   DESIGN: Dark Editorial — About Section
-   Asymmetric layout: large section number, two-column content
+   DESIGN: Warm Ink & Paper — About Section
+   Personal, warm, short biography
    ============================================================= */
 
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+const AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-avatar_f2b22a3b.png";
+
+const stats = [
+  { num: "10+", pl: "lat doświadczenia", en: "years of experience" },
+  { num: "A1–C1", pl: "wszystkie poziomy", en: "all levels" },
+  { num: "3", pl: "szkoły językowe", en: "language schools" },
+];
+
 export default function AboutSection() {
-  const { lang, t } = useLanguage();
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".reveal-about").forEach((el, i) => {
+              setTimeout(() => {
+                (el as HTMLElement).style.opacity = "1";
+                (el as HTMLElement).style.transform = "translateY(0)";
+              }, i * 120);
+            });
+          }
+        });
+      },
       { threshold: 0.1 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const stats = [
-    { value: "10+", labelPl: "lat doświadczenia", labelEn: "years of experience" },
-    { value: "500+", labelPl: "godzin lekcji", labelEn: "hours of lessons" },
-    { value: "3", labelPl: "projekty w budowie", labelEn: "projects in progress" },
-  ];
-
   return (
-    <section ref={sectionRef} id="about" className="relative py-24 md:py-32 overflow-hidden">
+    <section id="about" ref={sectionRef} className="py-24 bg-background">
       <div className="container">
-        {/* Section number background */}
-        <span className="section-number select-none">01</span>
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
 
-        {/* Section label */}
-        <div className="flex items-center gap-4 mb-12">
-          <span
-            className="text-xs tracking-[0.3em] uppercase text-primary"
-            style={{ fontFamily: "'Fira Code', monospace" }}
-          >
-            {t("O mnie", "About me")}
-          </span>
-          <div className="flex-1 separator-gradient" />
-        </div>
-
-        <div className={`grid md:grid-cols-2 gap-12 md:gap-20 items-start transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Left: heading */}
-          <div>
-            <h2
-              className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              {lang === "pl" ? (
-                <>Lektor.<br />Twórca.<br /><span className="text-primary">Ocalały.</span></>
-              ) : (
-                <>Tutor.<br />Builder.<br /><span className="text-primary">Survivor.</span></>
-              )}
-            </h2>
+          {/* Left column: label + heading + stats */}
+          <div className="lg:col-span-4">
+            <div className="relative mb-8">
+              <span className="deco-number">04</span>
+              <p className="section-label mb-3">{t("O mnie", "About Me")}</p>
+              <h2
+                className="text-3xl md:text-4xl font-bold text-foreground leading-tight"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              >
+                {t("Lektor. Trener. Człowiek.", "Tutor. Trainer. Human.")}
+              </h2>
+              <div className="rule-ink mt-6" />
+            </div>
 
             {/* Stats */}
-            <div className="flex gap-8 mt-10">
+            <div
+              className="reveal-about grid grid-cols-3 lg:grid-cols-1 gap-4 mt-8"
+              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+            >
               {stats.map((stat) => (
-                <div key={stat.value} className="flex flex-col">
-                  <span
-                    className="text-3xl font-bold text-primary"
+                <div key={stat.num} className="border-l-2 border-primary pl-4 py-1">
+                  <p
+                    className="text-2xl font-bold text-foreground"
                     style={{ fontFamily: "'Cormorant Garamond', serif" }}
                   >
-                    {stat.value}
-                  </span>
-                  <span className="text-xs text-muted-foreground mt-1" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                    {t(stat.labelPl, stat.labelEn)}
-                  </span>
+                    {stat.num}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {t(stat.pl, stat.en)}
+                  </p>
                 </div>
               ))}
             </div>
+
+            {/* Avatar */}
+            <div
+              className="reveal-about mt-8 hidden lg:block"
+              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+            >
+              <div className="relative inline-block">
+                <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-primary/30 shadow-lg animate-glow-pulse">
+                  <img
+                    src={AVATAR}
+                    alt="Maciej Wyrozumski"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+              </div>
+            </div>
           </div>
 
-          {/* Right: text */}
-          <div className="space-y-5 text-muted-foreground leading-relaxed" style={{ fontFamily: "'Outfit', sans-serif" }}>
-            <p className="text-foreground/90">
-              {t(
-                "Mam 37 lat i 10 lat doświadczenia jako lektor języka angielskiego. Pracowałem z setkami kursantów — od uczniów szkół średnich po menedżerów i specjalistów IT.",
-                "I'm 37 years old with 10 years of experience as an English language tutor. I've worked with hundreds of students — from high school pupils to managers and IT professionals."
-              )}
-            </p>
-            <p>
-              {t(
-                "Dziś łączę nauczanie z technologią. Buduję aplikację EdTech, która łączy naukę angielskiego z odpornością psychiczną — narzędzie stworzone z myślą o osobach z ADHD i tych, którzy szukają struktury w chaosie.",
-                "Today I combine teaching with technology. I'm building an EdTech app that merges English learning with mental resilience — a tool designed for people with ADHD and those who seek structure in chaos."
-              )}
-            </p>
-            <p>
-              {t(
-                "Jestem minimalistą i esencjalistą. Wstaje o 4:30, pracuję w blokach, buduję systemy. Nie romantyzuję walki — po prostu działam.",
-                "I'm a minimalist and essentialist. I wake up at 4:30, work in blocks, build systems. I don't romanticize the struggle — I just act."
-              )}
-            </p>
+          {/* Right column: bio text */}
+          <div className="lg:col-span-8">
+            <div className="space-y-6">
+              <div
+                className="reveal-about"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
+                <p className="text-base text-foreground leading-relaxed">
+                  {t(
+                    "Jestem lektorem języka angielskiego i absolwentem filologii angielskiej. Od ponad 10 lat pracuję z młodzieżą, studentami i dorosłymi — od poziomu A1 aż po C1. Przez lata byłem współwłaścicielem i managerem szkoły językowej, gdzie nadzorowałem pracę zespołu lektorów i dbałem o jakość metodyczną zajęć.",
+                    "I am an English language tutor and graduate of English philology. For over 10 years I have worked with teenagers, students, and adults — from A1 all the way to C1. For years I co-owned and managed a language school, where I supervised a team of tutors and ensured the methodological quality of lessons."
+                  )}
+                </p>
+              </div>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              {["Python", "React", "AI Tools", "SQL", "Supabase", "EdTech", "ADHD-friendly design"].map((tag) => (
-                <span key={tag} className="tech-tag">{tag}</span>
-              ))}
-              {["English C2", "Teaching", "Curriculum Design"].map((tag) => (
-                <span key={tag} className="lang-tag">{tag}</span>
-              ))}
+              <div
+                className="reveal-about"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  {t(
+                    "Na moich zajęciach stawiam na mówienie, osłuchanie z językiem i poprawną wymowę. Fonetyka to moja pasja — pracowałem jako Pronunciation Coach, pomagając klientom nie tylko mówić poprawnie, ale brzmieć naturalnie i pewnie. Zależy mi, żeby nauka była uporządkowana, praktyczna i bez zbędnego stresu.",
+                    "In my lessons, I focus on speaking, language exposure, and correct pronunciation. Phonetics is my passion — I have worked as a Pronunciation Coach, helping clients not only speak correctly but sound natural and confident. I care about learning being organized, practical, and free from unnecessary stress."
+                  )}
+                </p>
+              </div>
+
+              <div
+                className="reveal-about"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  {t(
+                    "Jestem ADHD. Wiem, jak uczy się mózg, który nie znosi nudy, chaosu i przeciążenia informacją. Dlatego moje zajęcia są zbudowane inaczej — mniej materiału, więcej sensu. Krótkie bloki, jasna struktura, zero zbędnego szumu. Uczę tak, jak sam chciałbym być uczony.",
+                    "I have ADHD. I know how a brain learns when it can't stand boredom, chaos, or information overload. That's why my lessons are built differently — less material, more meaning. Short blocks, clear structure, zero unnecessary noise. I teach the way I'd want to be taught."
+                  )}
+                </p>
+              </div>
+
+              {/* Philosophy block */}
+              <div
+                className="reveal-about border-l-2 border-primary/40 pl-5 py-2"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
+                <p
+                  className="text-base text-foreground font-medium leading-relaxed italic"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem" }}
+                >
+                  {t(
+                    "\"Nie wierzę w 3-godzinne sesje. Wierzę w 30 minut dziennie, każdego dnia.\" ",
+                    "\"I don't believe in 3-hour sessions. I believe in 30 minutes a day, every single day.\""
+                  )}
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  {t(
+                    "Nauka języka to nie sprint. To nawyk. Małe kroki, powtarzane konsekwentnie, budują więcej niż intensywne maratony raz na miesiąc. Nauka potwierdzona naukowo — i sprawdzona na sobie.",
+                    "Language learning is not a sprint. It's a habit. Small steps, repeated consistently, build more than intense marathons once a month. Science-backed — and personally tested."
+                  )}
+                </p>
+              </div>
+
+
+              {/* Tags */}
+              <div
+                className="reveal-about flex flex-wrap gap-2 pt-2"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
+                {["Business English", "Pronunciation Coach", "Cambridge Exams", "CEFR A1–C1", "Full Immersion", "ADHD-Friendly", "EdTech"].map((tag) => (
+                  <span key={tag} className="tag-green">{tag}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>

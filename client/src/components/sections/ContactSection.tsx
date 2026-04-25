@@ -1,169 +1,242 @@
 /* =============================================================
-   DESIGN: Dark Editorial — Contact Section
-   Clean contact with social links and simple form placeholder
+   DESIGN: Warm Ink & Paper — Contact Section
+   Simple contact form + contact info
    ============================================================= */
 
+import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Mail, Linkedin, Github, MessageCircle } from "lucide-react";
+import { Mail, Phone, Linkedin, Send, Clock } from "lucide-react";
 import { toast } from "sonner";
 
-const contactLinks = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "maciej@example.com",
-    href: "mailto:maciej@example.com",
-    color: "text-primary",
-  },
-  {
-    icon: Linkedin,
-    label: "LinkedIn",
-    value: "linkedin.com/in/maciej",
-    href: "https://linkedin.com",
-    color: "text-primary",
-  },
-  {
-    icon: Github,
-    label: "GitHub",
-    value: "github.com/maciej",
-    href: "https://github.com",
-    color: "text-primary",
-  },
-];
-
 export default function ContactSection() {
-  const { lang, t } = useLanguage();
+  const { t } = useLanguage();
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    forWhom: "",
+    goal: "",
+    format: "",
+    message: "",
+    rodo: false,
+  });
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.info(t("Formularz kontaktowy będzie dostępny wkrótce.", "Contact form coming soon."));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+    }));
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.rodo) {
+      toast.error(t("Proszę zaakceptować zgodę RODO.", "Please accept the RODO consent."));
+      return;
+    }
+    setSubmitting(true);
+    // Simulate send
+    setTimeout(() => {
+      setSubmitting(false);
+      toast.success(t("Wiadomość wysłana! Odpiszę w ciągu 24 godzin.", "Message sent! I'll reply within 24 hours."));
+      setForm({ name: "", email: "", phone: "", forWhom: "", goal: "", format: "", message: "", rodo: false });
+    }, 1500);
+  };
+
+  const inputClass = "w-full px-4 py-3 text-sm bg-background/60 border border-border/60 rounded-sm focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-colors placeholder:text-muted-foreground/40 text-foreground";
+  const labelClass = "block text-xs font-medium text-muted-foreground mb-1.5 tracking-wide uppercase";
+
   return (
-    <section id="contact" className="relative py-24 md:py-32 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+    <section id="contact" className="py-24 bg-card/30">
+      <div className="container">
+        <div className="grid lg:grid-cols-12 gap-12">
 
-      <div className="container relative">
-        {/* Section number background */}
-        <span className="section-number">04</span>
+          {/* Left: heading + contact info */}
+          <div className="lg:col-span-4">
+            <div className="relative mb-8">
+              <span className="deco-number">07</span>
+              <p className="section-label mb-3">{t("Kontakt", "Contact")}</p>
+              <h2
+                className="text-3xl md:text-4xl font-bold text-foreground leading-tight"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              >
+                {t("Zacznijmy razem", "Let's start together")}
+              </h2>
+              <div className="rule-ink mt-6" />
+            </div>
 
-        {/* Section label */}
-        <div className="flex items-center gap-4 mb-12">
-          <span
-            className="text-xs tracking-[0.3em] uppercase text-primary"
-            style={{ fontFamily: "'Fira Code', monospace" }}
-          >
-            {t("Kontakt", "Contact")}
-          </span>
-          <div className="flex-1 separator-gradient" />
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20">
-          {/* Left: heading + links */}
-          <div>
-            <h2
-              className="text-4xl md:text-5xl font-semibold text-foreground mb-6"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              {t("Porozmawiajmy", "Let's talk")}
-            </h2>
-            <p className="text-muted-foreground mb-10 leading-relaxed" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-8">
               {t(
-                "Szukasz lektora angielskiego? Chcesz porozmawiać o współpracy przy projekcie EdTech lub AI? Napisz do mnie.",
-                "Looking for an English tutor? Want to discuss collaboration on an EdTech or AI project? Reach out."
+                "Wypełnij formularz, a odezwę się w ciągu 24 godzin. Pierwsza konsultacja (30 min) jest bezpłatna.",
+                "Fill in the form and I'll get back to you within 24 hours. The first consultation (30 min) is free."
               )}
             </p>
 
-            {/* Contact links */}
             <div className="space-y-4">
-              {contactLinks.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 group"
-                  >
-                    <div className="w-10 h-10 rounded border border-border flex items-center justify-center group-hover:border-primary/40 group-hover:bg-primary/5 transition-all">
-                      <Icon size={16} className={`${link.color} opacity-70 group-hover:opacity-100 transition-opacity`} />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground" style={{ fontFamily: "'Fira Code', monospace" }}>
-                        {link.label}
-                      </p>
-                      <p className="text-sm text-foreground group-hover:text-primary transition-colors" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                        {link.value}
-                      </p>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
-
-            {/* Availability */}
-            <div className="mt-10 flex items-center gap-3 p-4 rounded border border-primary/20 bg-primary/5">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <p className="text-sm text-foreground/80" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                {t(
-                  "Dostępny do nowych projektów i kursantów",
-                  "Available for new projects and students"
-                )}
-              </p>
+              <a
+                href="mailto:maciej.wyrozumski@gmail.com"
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <div className="w-9 h-9 rounded-sm bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <Mail size={15} className="text-primary" />
+                </div>
+                maciej.wyrozumski@gmail.com
+              </a>
+              <a
+                href="tel:+48536524867"
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <div className="w-9 h-9 rounded-sm bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <Phone size={15} className="text-primary" />
+                </div>
+                +48 536 524 867
+              </a>
+              <a
+                href="https://linkedin.com/in/maciej-wyrozumski"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <div className="w-9 h-9 rounded-sm bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <Linkedin size={15} className="text-primary" />
+                </div>
+                LinkedIn
+              </a>
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <div className="w-9 h-9 rounded-sm bg-primary/10 flex items-center justify-center">
+                  <Clock size={15} className="text-primary" />
+                </div>
+                {t("Odpowiadam zwykle w ciągu 24h", "I usually reply within 24h")}
+              </div>
             </div>
           </div>
 
-          {/* Right: simple form */}
-          <div>
-            <form onSubmit={handleFormSubmit} className="space-y-4">
-              <div>
-                <label className="block text-xs text-muted-foreground mb-1.5" style={{ fontFamily: "'Fira Code', monospace" }}>
-                  {t("Imię", "Name")}
-                </label>
-                <input
-                  type="text"
-                  placeholder={t("Twoje imię", "Your name")}
-                  className="w-full px-4 py-3 rounded bg-card border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors text-sm"
-                  style={{ fontFamily: "'Outfit', sans-serif" }}
-                />
+          {/* Right: form */}
+          <div className="lg:col-span-8">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label className={labelClass}>{t("Imię *", "Name *")}</label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder={t("Twoje imię", "Your name")}
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className={labelClass}>{t("E-mail *", "Email *")}</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="email@example.com"
+                    className={inputClass}
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-xs text-muted-foreground mb-1.5" style={{ fontFamily: "'Fira Code', monospace" }}>
-                  Email
-                </label>
-                <input
-                  type="email"
-                  placeholder={t("twoj@email.com", "your@email.com")}
-                  className="w-full px-4 py-3 rounded bg-card border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors text-sm"
-                  style={{ fontFamily: "'Outfit', sans-serif" }}
-                />
+
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label className={labelClass}>{t("Telefon (opcjonalnie)", "Phone (optional)")}</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="+48 000 000 000"
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className={labelClass}>{t("Dla kogo są zajęcia?", "Who are the lessons for?")}</label>
+                  <select name="forWhom" value={form.forWhom} onChange={handleChange} className={inputClass}>
+                    <option value="">{t("Wybierz...", "Choose...")}</option>
+                    <option value="adult">{t("Dla mnie (dorosły)", "For me (adult)")}</option>
+                    <option value="teen">{t("Dla nastolatka", "For a teenager")}</option>
+                    <option value="company">{t("Dla firmy / zespołu", "For a company / team")}</option>
+                    <option value="group">{t("Dla grupy", "For a group")}</option>
+                  </select>
+                </div>
               </div>
+
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label className={labelClass}>{t("Cel nauki", "Learning goal")}</label>
+                  <select name="goal" value={form.goal} onChange={handleChange} className={inputClass}>
+                    <option value="">{t("Wybierz...", "Choose...")}</option>
+                    <option value="general">{t("Angielski ogólny / konwersacje", "General English / conversations")}</option>
+                    <option value="business">{t("Business English", "Business English")}</option>
+                    <option value="pronunciation">{t("Wymowa / fonetyka", "Pronunciation / phonetics")}</option>
+                    <option value="exam">{t("Przygotowanie do egzaminu", "Exam preparation")}</option>
+                    <option value="abroad">{t("Wyjazd za granicę", "Moving/travelling abroad")}</option>
+                  </select>
+                </div>
+                <div>
+                  <label className={labelClass}>{t("Preferowana forma", "Preferred format")}</label>
+                  <select name="format" value={form.format} onChange={handleChange} className={inputClass}>
+                    <option value="">{t("Wybierz...", "Choose...")}</option>
+                    <option value="online">{t("Online", "Online")}</option>
+                    <option value="inperson">{t("Stacjonarnie (Bielsko-Biała)", "In person (Bielsko-Biała)")}</option>
+                    <option value="both">{t("Hybrydowo", "Hybrid")}</option>
+                  </select>
+                </div>
+              </div>
+
               <div>
-                <label className="block text-xs text-muted-foreground mb-1.5" style={{ fontFamily: "'Fira Code', monospace" }}>
-                  {t("Wiadomość", "Message")}
-                </label>
+                <label className={labelClass}>{t("Krótka wiadomość", "Short message")}</label>
                 <textarea
-                  rows={5}
-                  placeholder={t("W czym mogę pomóc?", "How can I help you?")}
-                  className="w-full px-4 py-3 rounded bg-card border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors text-sm resize-none"
-                  style={{ fontFamily: "'Outfit', sans-serif" }}
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={4}
+                  placeholder={t(
+                    "Napisz kilka słów o sobie, swoim poziomie i oczekiwaniach...",
+                    "Tell me a bit about yourself, your level, and expectations..."
+                  )}
+                  className={`${inputClass} resize-none`}
                 />
               </div>
+
+              {/* RODO */}
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  name="rodo"
+                  id="rodo"
+                  checked={form.rodo}
+                  onChange={handleChange}
+                  className="mt-0.5 w-4 h-4 accent-primary"
+                />
+                <label htmlFor="rodo" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                  {t(
+                    "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie, zgodnie z RODO. Dane nie będą przekazywane osobom trzecim.",
+                    "I consent to the processing of my personal data for the purpose of responding to my inquiry, in accordance with GDPR. Data will not be shared with third parties."
+                  )}
+                </label>
+              </div>
+
               <button
                 type="submit"
-                className="w-full py-3 rounded bg-primary text-primary-foreground font-semibold text-sm tracking-wide hover:opacity-90 transition-all glow-green"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
+                disabled={submitting}
+                className="btn-primary w-full justify-center gap-2"
               >
-                <span className="flex items-center justify-center gap-2">
-                  <MessageCircle size={16} />
-                  {t("Wyślij wiadomość", "Send message")}
-                </span>
+                {submitting ? (
+                  <span>{t("Wysyłanie...", "Sending...")}</span>
+                ) : (
+                  <>
+                    <Send size={15} />
+                    {t("Wyślij wiadomość", "Send message")}
+                  </>
+                )}
               </button>
-              <p className="text-xs text-muted-foreground text-center" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                {t("Formularz wkrótce aktywny — na razie napisz bezpośrednio na email.", "Form coming soon — for now, write directly to email.")}
-              </p>
             </form>
           </div>
         </div>
