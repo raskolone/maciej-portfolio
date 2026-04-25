@@ -5,6 +5,7 @@
    ============================================================= */
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import ConstellationCanvas from "@/components/ConstellationCanvas";
 import TypewriterText from "@/components/TypewriterText";
 
@@ -12,6 +13,7 @@ const AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYK
 
 export default function HeroSection() {
   const { lang, t } = useLanguage();
+  const { theme } = useTheme();
 
   const phrases = lang === "pl"
     ? ["Full Immersion Teacher", "Pronunciation Coach", "EdTech Builder", "AI Enthusiast"]
@@ -21,6 +23,11 @@ export default function HeroSection() {
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{
+        background: theme === "light"
+          ? "linear-gradient(135deg, #f0f4f0 0%, #e8f0e8 40%, #dde8dd 100%)"
+          : "linear-gradient(135deg, #050f08 0%, #071510 40%, #040d0a 100%)",
+      }}
     >
       {/* Constellation background */}
       <ConstellationCanvas />
