@@ -95,7 +95,7 @@ export default function AboutSection() {
                     src={PHOTO}
                     alt="Maciej Wyrozumski"
                     className="w-full object-cover"
-                    style={{ maxHeight: "280px", objectPosition: "center top" }}
+                    style={{ display: "block" }}
                   />
                 </div>
                 {/* Subtle green accent line */}
