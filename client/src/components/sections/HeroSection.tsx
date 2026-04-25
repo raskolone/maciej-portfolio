@@ -5,7 +5,6 @@
    ============================================================= */
 
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "@/contexts/ThemeContext";
 import ConstellationCanvas from "@/components/ConstellationCanvas";
 import TypewriterText from "@/components/TypewriterText";
 
@@ -13,7 +12,6 @@ const AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYK
 
 export default function HeroSection() {
   const { lang, t } = useLanguage();
-  const { theme } = useTheme();
 
   const phrases = lang === "pl"
     ? ["Full Immersion Teacher", "Pronunciation Coach", "EdTech Builder", "AI Enthusiast"]
@@ -22,15 +20,18 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        background: theme === "light"
-          ? "linear-gradient(135deg, #f0f4f0 0%, #e8f0e8 40%, #dde8dd 100%)"
-          : "#080808",
-      }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Constellation background */}
+      {/* Animated constellation */}
       <ConstellationCanvas />
+      {/* Radial gradient overlay for depth — original from ZIP */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, oklch(0.11 0.015 240 / 60%) 100%)",
+          zIndex: 1,
+        }}
+      />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-4 pt-16">
