@@ -140,6 +140,29 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
+
+        {/* Tagline + CribroEnglish brand */}
+        <div
+          className="animate-fade-in mt-10 mb-6 flex flex-col items-center gap-2"
+          style={{ opacity: 0, animationDelay: "1.1s", animationFillMode: "forwards" }}
+        >
+          <div className="flex items-center gap-2">
+            <div className="h-px w-8 bg-primary/40" />
+            <span
+              className="text-muted-foreground/60 text-[11px] tracking-[0.25em] uppercase"
+              style={{ fontFamily: "'DM Mono', monospace" }}
+            >
+              less noise. more language.
+            </span>
+            <div className="h-px w-8 bg-primary/40" />
+          </div>
+          <span
+            className="text-primary/70 text-[10px] tracking-[0.3em] uppercase font-bold"
+            style={{ fontFamily: "'DM Mono', monospace" }}
+          >
+            CribroEnglish
+          </span>
+        </div>
       </div>
     </section>
   );

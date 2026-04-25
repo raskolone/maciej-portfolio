@@ -47,10 +47,18 @@ export default function Navbar() {
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          className="text-foreground font-bold hover:text-primary transition-colors"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", letterSpacing: "-0.01em" }}
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
         >
-          MW<span className="text-primary">.</span>
+          <span
+            className="text-foreground font-bold"
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", letterSpacing: "-0.01em" }}
+          >
+            MW<span className="text-primary">.</span>
+          </span>
+          <span className="hidden sm:flex flex-col leading-none">
+            <span className="text-foreground/40 text-[9px] tracking-[0.2em] uppercase font-medium">by</span>
+            <span className="text-primary text-[11px] tracking-[0.15em] uppercase font-bold">CribroEnglish</span>
+          </span>
         </a>
 
         {/* Desktop nav */}
