@@ -30,19 +30,38 @@ export default function ContactSection() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.rodo) {
       toast.error(t("Proszę zaakceptować zgodę RODO.", "Please accept the RODO consent."));
       return;
     }
     setSubmitting(true);
-    // Simulate send
-    setTimeout(() => {
+    try {
+      const res = await fetch("https://formspree.io/f/xzzbnqwk", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          forWhom: form.forWhom,
+          goal: form.goal,
+          format: form.format,
+          message: form.message,
+        }),
+      });
+      if (res.ok) {
+        toast.success(t("Wiadomość wysłana! Odpiszę w ciągu 24 godzin.", "Message sent! I'll reply within 24 hours."));
+        setForm({ name: "", email: "", phone: "", forWhom: "", goal: "", format: "", message: "", rodo: false });
+      } else {
+        throw new Error("send failed");
+      }
+    } catch {
+      toast.error(t("Błąd wysyłki. Napisz bezpośrednio na wyrozumski@maciej.pro", "Send error. Write directly to wyrozumski@maciej.pro"));
+    } finally {
       setSubmitting(false);
-      toast.success(t("Wiadomość wysłana! Odpiszę w ciągu 24 godzin.", "Message sent! I'll reply within 24 hours."));
-      setForm({ name: "", email: "", phone: "", forWhom: "", goal: "", format: "", message: "", rodo: false });
-    }, 1500);
+    }
   };
 
   const inputClass = "w-full px-4 py-3 text-sm bg-background/60 border border-border/60 rounded-sm focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-colors placeholder:text-muted-foreground/40 text-foreground";
@@ -76,13 +95,13 @@ export default function ContactSection() {
 
             <div className="space-y-4">
               <a
-                href="mailto:maciej.wyrozumski@gmail.com"
+                href="mailto:wyrozumski@maciej.pro"
                 className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
               >
                 <div className="w-9 h-9 rounded-sm bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <Mail size={15} className="text-primary" />
                 </div>
-                maciej.wyrozumski@gmail.com
+                wyrozumski@maciej.pro
               </a>
               <a
                 href="tel:+48536524867"

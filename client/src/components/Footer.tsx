@@ -79,9 +79,9 @@ export default function Footer() {
               {t("Kontakt", "Contact")}
             </p>
             <div className="space-y-3">
-              <a href="mailto:maciej.wyrozumski@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href="mailto:wyrozumski@maciej.pro" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Mail size={13} />
-                maciej.wyrozumski@gmail.com
+                wyrozumski@maciej.pro
               </a>
               <a href="tel:+48536524867" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Phone size={13} />
