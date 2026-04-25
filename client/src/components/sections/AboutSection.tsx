@@ -6,7 +6,7 @@
 import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-avatar_f2b22a3b.png";
+const PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-photo-editorial_4c075e9b.png";
 
 const stats = [
   { num: "10+", pl: "lat doświadczenia", en: "years of experience" },
@@ -77,20 +77,32 @@ export default function AboutSection() {
               ))}
             </div>
 
-            {/* Avatar */}
+            {/* Photo */}
             <div
               className="reveal-about mt-8 hidden lg:block"
               style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
             >
-              <div className="relative inline-block">
-                <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-primary/30 shadow-lg animate-glow-pulse">
+              <div className="relative">
+                <div
+                  className="overflow-hidden"
+                  style={{
+                    borderRadius: "2px",
+                    boxShadow: "0 0 40px oklch(0.65 0.2 145 / 0.15), 0 8px 32px rgba(0,0,0,0.5)",
+                    border: "1px solid oklch(0.65 0.2 145 / 0.2)",
+                  }}
+                >
                   <img
-                    src={AVATAR}
+                    src={PHOTO}
                     alt="Maciej Wyrozumski"
-                    className="w-full h-full object-cover"
+                    className="w-full object-cover"
+                    style={{ maxHeight: "280px", objectPosition: "center top" }}
                   />
                 </div>
-
+                {/* Subtle green accent line */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-0.5"
+                  style={{ background: "linear-gradient(90deg, transparent, oklch(0.65 0.2 145), transparent)" }}
+                />
               </div>
             </div>
           </div>
