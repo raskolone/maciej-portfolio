@@ -111,8 +111,9 @@ export default function Navbar() {
           )}
 
           <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
+            href="https://calendly.com/maciej-wyrozumski/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary text-xs py-2 px-4"
           >
             {t("Umów lekcję", "Book a lesson")}
@@ -165,8 +166,9 @@ export default function Navbar() {
             )}
           </div>
           <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
+            href="https://calendly.com/maciej-wyrozumski/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary text-center mt-2"
           >
             {t("Umów lekcję", "Book a lesson")}

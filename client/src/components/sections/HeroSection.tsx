@@ -101,8 +101,9 @@ export default function HeroSection() {
           style={{ opacity: 0, animationDelay: "0.75s", animationFillMode: "forwards" }}
         >
           <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+            href="https://calendly.com/maciej-wyrozumski/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary"
           >
             {t("Umów pierwszą lekcję", "Book a lesson")}
