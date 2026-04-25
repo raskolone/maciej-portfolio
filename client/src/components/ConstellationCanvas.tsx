@@ -15,7 +15,6 @@ interface Star {
   opacity: number;
 }
 
-const STAR_COUNT = 100;
 const CONNECTION_DIST = 150;
 const MOUSE_DIST = 200;
 
@@ -37,8 +36,10 @@ export default function ConstellationCanvas() {
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-      // Re-init stars on resize to fill new dimensions
-      starsRef.current = Array.from({ length: STAR_COUNT }, () => ({
+      // Reduce star count by half on mobile (< 768px)
+      const isMobile = canvas.width < 768;
+      const starCount = isMobile ? 50 : 100;
+      starsRef.current = Array.from({ length: starCount }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.22,
