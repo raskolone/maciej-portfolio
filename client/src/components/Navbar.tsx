@@ -5,9 +5,8 @@
    ============================================================= */
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "@/contexts/ThemeContext";
 import { Link } from "wouter";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#about",    pl: "O mnie",   en: "About" },
@@ -20,7 +19,6 @@ const navLinks = [
 
 export default function Navbar() {
   const { lang, toggleLang, t } = useLanguage();
-  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -110,16 +108,6 @@ export default function Navbar() {
             <span className={lang === "en" ? "text-primary font-semibold" : ""}>EN</span>
           </button>
 
-          {toggleTheme && (
-            <button
-              onClick={toggleTheme}
-              className="text-muted-foreground hover:text-primary transition-colors p-1"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
-          )}
-
           <a
             href="https://calendly.com/maciej-wyrozumski/30min"
             target="_blank"
@@ -169,11 +157,6 @@ export default function Navbar() {
               <span className="mx-1 opacity-30">|</span>
               <span className={lang === "en" ? "text-primary" : ""}>EN</span>
             </button>
-            {toggleTheme && (
-              <button onClick={toggleTheme} className="text-muted-foreground hover:text-primary transition-colors">
-                {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-              </button>
-            )}
           </div>
           <a
             href="https://calendly.com/maciej-wyrozumski/30min"

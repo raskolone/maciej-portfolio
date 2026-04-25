@@ -22,7 +22,6 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider
         defaultTheme="dark"
-        switchable
       >
         <LanguageProvider>
           <TooltipProvider>
