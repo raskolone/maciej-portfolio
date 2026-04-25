@@ -47,17 +47,13 @@ export default function Navbar() {
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity shrink-0"
         >
           <span
             className="text-foreground font-bold"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", letterSpacing: "-0.01em" }}
           >
             MW<span className="text-primary">.</span>
-          </span>
-          <span className="hidden sm:flex flex-col leading-none">
-            <span className="text-foreground/40 text-[9px] tracking-[0.2em] uppercase font-medium">by</span>
-            <span className="text-primary text-[11px] tracking-[0.15em] uppercase font-bold">CribroEnglish</span>
           </span>
         </a>
 
@@ -98,6 +94,16 @@ export default function Navbar() {
 
         {/* Right controls */}
         <div className="hidden md:flex items-center gap-4">
+          <span className="hidden xl:flex items-center gap-1.5 mr-1">
+            <span className="h-3 w-px bg-border" />
+            <span
+              className="text-primary/50 text-[9px] tracking-[0.22em] uppercase font-bold"
+              style={{ fontFamily: "'DM Mono', monospace" }}
+            >
+              CribroEnglish
+            </span>
+            <span className="h-3 w-px bg-border" />
+          </span>
           <button
             onClick={toggleLang}
             className="text-xs tracking-widest text-muted-foreground hover:text-primary transition-colors"
