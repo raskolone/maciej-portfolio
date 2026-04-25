@@ -1,8 +1,6 @@
 /* =============================================================
    DESIGN: Dark Constellation — Animated Canvas Background
-   Stars + connecting lines, reacts to mouse movement
-   Dark: bright white stars + green lines on deep black-green bg
-   Light: dark navy stars + green lines on pale green-white bg
+   Pure black bg, bright white stars with glow, vivid green lines
    ============================================================= */
 
 import { useEffect, useRef } from "react";
@@ -17,9 +15,9 @@ interface Star {
   opacity: number;
 }
 
-const STAR_COUNT = 110;
-const CONNECTION_DIST = 140;
-const MOUSE_DIST = 180;
+const STAR_COUNT = 100;
+const CONNECTION_DIST = 150;
+const MOUSE_DIST = 200;
 
 export default function ConstellationCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -36,27 +34,21 @@ export default function ConstellationCanvas() {
 
     const isDark = theme !== "light";
 
-    // Dark: white stars, green lines
-    // Light: dark navy stars, dark green lines
-    const starColor = isDark ? "200,230,210" : "15,40,25";
-    const lineColor = isDark ? "80,200,120" : "30,120,60";
-
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
+      // Re-init stars on resize to fill new dimensions
+      starsRef.current = Array.from({ length: STAR_COUNT }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
+        radius: Math.random() * 1.6 + 0.7,
+        opacity: Math.random() * 0.35 + 0.65,  // 0.65–1.0 — bright
+      }));
     };
     resize();
     window.addEventListener("resize", resize);
-
-    // Init stars
-    starsRef.current = Array.from({ length: STAR_COUNT }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-      radius: Math.random() * 1.8 + 0.6,
-      opacity: Math.random() * 0.45 + 0.45,  // 0.45–0.90 — more visible
-    }));
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -68,58 +60,71 @@ export default function ConstellationCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const stars = starsRef.current;
 
-      // Draw connections between stars
+      // Draw connections between nearby stars
       for (let i = 0; i < stars.length; i++) {
         for (let j = i + 1; j < stars.length; j++) {
           const dx = stars[i].x - stars[j].x;
           const dy = stars[i].y - stars[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECTION_DIST) {
-            // More visible lines: alpha up to 0.35
-            const alpha = (1 - dist / CONNECTION_DIST) * 0.35;
+            const alpha = isDark
+              ? (1 - dist / CONNECTION_DIST) * 0.55   // bright on dark
+              : (1 - dist / CONNECTION_DIST) * 0.4;
             ctx.beginPath();
             ctx.moveTo(stars[i].x, stars[i].y);
             ctx.lineTo(stars[j].x, stars[j].y);
-            ctx.strokeStyle = `rgba(${lineColor},${alpha})`;
-            ctx.lineWidth = 0.7;
+            ctx.strokeStyle = isDark
+              ? `rgba(80, 200, 120, ${alpha})`
+              : `rgba(20, 110, 50, ${alpha})`;
+            ctx.lineWidth = isDark ? 0.8 : 0.7;
             ctx.stroke();
           }
         }
 
-        // Mouse connections — bright green glow lines
+        // Mouse connections — bright green
         const mdx = stars[i].x - mouseRef.current.x;
         const mdy = stars[i].y - mouseRef.current.y;
         const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
         if (mdist < MOUSE_DIST) {
-          const alpha = (1 - mdist / MOUSE_DIST) * 0.6;
+          const alpha = (1 - mdist / MOUSE_DIST) * 0.75;
           ctx.beginPath();
           ctx.moveTo(stars[i].x, stars[i].y);
           ctx.lineTo(mouseRef.current.x, mouseRef.current.y);
-          ctx.strokeStyle = `rgba(${lineColor},${alpha})`;
-          ctx.lineWidth = 1.0;
+          ctx.strokeStyle = isDark
+            ? `rgba(100, 230, 140, ${alpha})`
+            : `rgba(20, 110, 50, ${alpha})`;
+          ctx.lineWidth = 1.1;
           ctx.stroke();
         }
       }
 
-      // Draw stars with subtle glow
+      // Draw stars
       for (const star of stars) {
-        // Glow halo
-        const gradient = ctx.createRadialGradient(
-          star.x, star.y, 0,
-          star.x, star.y, star.radius * 3
-        );
-        gradient.addColorStop(0, `rgba(${starColor},${star.opacity})`);
-        gradient.addColorStop(1, `rgba(${starColor},0)`);
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius * 3, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
+        if (isDark) {
+          // Glow halo — soft white
+          const grd = ctx.createRadialGradient(
+            star.x, star.y, 0,
+            star.x, star.y, star.radius * 4
+          );
+          grd.addColorStop(0, `rgba(255,255,255,${star.opacity * 0.6})`);
+          grd.addColorStop(1, `rgba(255,255,255,0)`);
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius * 4, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
 
-        // Core dot
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${starColor},${star.opacity})`;
-        ctx.fill();
+          // Bright core
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${star.opacity})`;
+          ctx.fill();
+        } else {
+          // Light mode: dark navy dots
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius * 0.8, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(10,40,20,${star.opacity * 0.7})`;
+          ctx.fill();
+        }
 
         // Move
         star.x += star.vx;

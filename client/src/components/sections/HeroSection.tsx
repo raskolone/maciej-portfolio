@@ -26,7 +26,7 @@ export default function HeroSection() {
       style={{
         background: theme === "light"
           ? "linear-gradient(135deg, #f0f4f0 0%, #e8f0e8 40%, #dde8dd 100%)"
-          : "linear-gradient(135deg, #050f08 0%, #071510 40%, #040d0a 100%)",
+          : "#080808",
       }}
     >
       {/* Constellation background */}
