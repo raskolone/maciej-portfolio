@@ -76,11 +76,11 @@ export default function Navbar() {
           ))}
           <li>
             <Link
-              href="/projects"
+              href="/apps"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
               style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
             >
-              Developer
+              {t("Aplikacje", "Apps")}
             </Link>
           </li>
           <li>
@@ -141,11 +141,11 @@ export default function Navbar() {
             </button>
           ))}
           <Link
-            href="/projects"
+            href="/apps"
             onClick={() => setMenuOpen(false)}
             className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1"
           >
-            Developer
+            {t("Aplikacje", "Apps")}
           </Link>
           <div className="flex items-center gap-4 pt-2">
             <button
