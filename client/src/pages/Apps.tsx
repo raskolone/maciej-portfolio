@@ -58,17 +58,87 @@ export default function Apps() {
               </p>
             </div>
 
-            {/* Right: Cribro Labs logo */}
-            <div className="flex-shrink-0">
-              <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/cribro-labs-logo_0fcfc0cf.png"
-                alt="Cribro Labs"
-                className="w-48 md:w-56 lg:w-64 object-contain"
+            {/* Right: Cribro Labs logo — SVG inline, pulsating glow */}
+            <div className="flex-shrink-0 flex items-center justify-center md:justify-end">
+              <div
                 style={{
-                  borderRadius: "2px",
-                  opacity: 0.92,
+                  position: "relative",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "20px",
+                  borderRadius: "4px",
+                  animation: "cribroGlow 2.8s ease-in-out infinite",
                 }}
-              />
+              >
+                <style>{`
+                  @keyframes cribroGlow {
+                    0%, 100% { box-shadow: 0 0 18px 4px oklch(0.65 0.2 145 / 0.25), 0 0 40px 8px oklch(0.65 0.2 145 / 0.10); }
+                    50%       { box-shadow: 0 0 32px 10px oklch(0.65 0.2 145 / 0.50), 0 0 70px 20px oklch(0.65 0.2 145 / 0.20); }
+                  }
+                `}</style>
+                {/* SVG Cribro Labs logo — no background */}
+                <svg
+                  width="220"
+                  height="110"
+                  viewBox="0 0 220 110"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-label="Cribro Labs"
+                >
+                  {/* Double-C icon */}
+                  <g transform="translate(8, 10)">
+                    {/* Outer C */}
+                    <path
+                      d="M 58 45 A 38 38 0 1 0 58 65"
+                      stroke="#4ade80"
+                      strokeWidth="5"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                    {/* Inner C */}
+                    <path
+                      d="M 50 45 A 26 26 0 1 0 50 65"
+                      stroke="#4ade80"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                    {/* Dot at end of inner C */}
+                    <circle cx="50" cy="65" r="3.5" fill="#4ade80" />
+                  </g>
+                  {/* CRIBRO text */}
+                  <text
+                    x="88"
+                    y="52"
+                    fontFamily="'DM Sans', sans-serif"
+                    fontWeight="700"
+                    fontSize="26"
+                    letterSpacing="3"
+                    fill="white"
+                  >CRIBRO</text>
+                  {/* LABS text */}
+                  <text
+                    x="88"
+                    y="80"
+                    fontFamily="'DM Sans', sans-serif"
+                    fontWeight="700"
+                    fontSize="26"
+                    letterSpacing="3"
+                    fill="#4ade80"
+                  >LABS</text>
+                  {/* tagline */}
+                  <text
+                    x="88"
+                    y="98"
+                    fontFamily="'DM Sans', sans-serif"
+                    fontWeight="400"
+                    fontSize="9"
+                    letterSpacing="1"
+                    fill="#6b7280"
+                  >less noise. more action.</text>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
