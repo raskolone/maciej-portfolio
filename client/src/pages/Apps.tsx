@@ -35,24 +35,42 @@ export default function Apps() {
       {/* Hero */}
       <section className="pt-32 pb-16 border-b border-border">
         <div className="container">
-          <p
-            className="section-label mb-3"
-            style={{ fontFamily: "'DM Mono', monospace" }}
-          >
-            {t("Moje aplikacje", "My Apps")}
-          </p>
-          <h1
-            className="text-4xl md:text-5xl font-bold text-foreground leading-tight"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            {t("Aplikacje", "Applications")}
-          </h1>
-          <p className="mt-4 text-muted-foreground text-base max-w-xl">
-            {t(
-              "Narzędzia, które buduję i których używam na co dzień. Każde z nich to odpowiedź na konkretny problem.",
-              "Tools I build and use every day. Each one is an answer to a specific problem."
-            )}
-          </p>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            {/* Left: heading */}
+            <div>
+              <p
+                className="section-label mb-3"
+                style={{ fontFamily: "'DM Mono', monospace" }}
+              >
+                {t("Moje aplikacje", "My Apps")}
+              </p>
+              <h1
+                className="text-4xl md:text-5xl font-bold text-foreground leading-tight"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              >
+                {t("Aplikacje", "Applications")}
+              </h1>
+              <p className="mt-4 text-muted-foreground text-base max-w-xl">
+                {t(
+                  "Narzędzia, które buduję i których używam na co dzień. Każde z nich to odpowiedź na konkretny problem.",
+                  "Tools I build and use every day. Each one is an answer to a specific problem."
+                )}
+              </p>
+            </div>
+
+            {/* Right: Cribro Labs logo */}
+            <div className="flex-shrink-0">
+              <img
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/cribro-labs-logo_0fcfc0cf.png"
+                alt="Cribro Labs"
+                className="w-48 md:w-56 lg:w-64 object-contain"
+                style={{
+                  borderRadius: "2px",
+                  opacity: 0.92,
+                }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
