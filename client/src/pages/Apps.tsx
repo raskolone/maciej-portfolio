@@ -56,6 +56,47 @@ export default function Apps() {
         </div>
       </section>
 
+      {/* Intro article */}
+      <section className="py-16 border-b border-border">
+        <div className="container">
+          <div className="max-w-2xl">
+            <div
+              className="space-y-5 text-base leading-relaxed"
+            >
+              <p className="text-foreground">
+                {t(
+                  "Buduję aplikacje pod marką Cribro — i robię to celowo. Cribro to nie tylko nazwa. To filozofia: odsiać szum, zostawić to, co działa. Słowo pochodzi od łacińskiego cribrum — sito. Taki jest też mój sposób myślenia o produktach cyfrowych.",
+                  "I build apps under the Cribro brand — and I do it deliberately. Cribro is not just a name. It's a philosophy: filter out the noise, keep what works. The word comes from the Latin cribrum — a sieve. That's also how I think about digital products."
+                )}
+              </p>
+              <p className="text-muted-foreground">
+                {t(
+                  "Nie buduję aplikacji, żeby mieć aplikacje. Buduję je, bo brakuje mi narzędzi, które są proste, szybkie i nie rozpraszają. Każda z nich to odpowiedź na konkretny problem — mój własny lub moich użytkowników. Mniej funkcji, więcej sensu. Mniej ekranów, więcej skupienia.",
+                  "I don't build apps to have apps. I build them because I'm missing tools that are simple, fast, and distraction-free. Each one is an answer to a specific problem — my own or my users'. Fewer features, more meaning. Fewer screens, more focus."
+                )}
+              </p>
+              <p className="text-muted-foreground">
+                {t(
+                  "Cribro to mój nowy kierunek — obok CribroEnglish, gdzie uczę języka angielskiego. Niebawem powstaną osobne strony i profile dla każdego projektu. Na razie wszystko zaczyna się tutaj.",
+                  "Cribro is my new direction — alongside CribroEnglish, where I teach English. Separate pages and profiles for each project are coming soon. For now, everything starts here."
+                )}
+              </p>
+              <div className="pt-2 border-l-2 border-primary/40 pl-5">
+                <p
+                  className="text-foreground font-medium italic"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem" }}
+                >
+                  {t(
+                    "\"Mniej szumu. Więcej działania. Każda aplikacja musi zarabiać na swoje miejsce.\"",
+                    "\"Less noise. More action. Every app must earn its place.\""
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Apps grid */}
       <section className="py-20">
         <div className="container">
