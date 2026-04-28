@@ -22,7 +22,7 @@ function Router() {
 
 function App() {
   useEffect(() => {
-    document.title = "Maciej Wyrozumski - English Coach | CribroEnglish";
+    document.title = "Maciej Wyrozumski — English Coach & Builder";
   }, []);
 
   return (
