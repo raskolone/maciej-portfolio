@@ -19,8 +19,8 @@ const apps = [
       "Aplikacja do codziennego pisania, refleksji i budowania nawyku myślenia. Zaprojektowana z myślą o prostocie — mniej szumu, więcej głębi.",
     descEn:
       "An app for daily writing, reflection, and building a thinking habit. Designed with simplicity in mind — less noise, more depth.",
-    url: "https://journal.cribro.com",
-    label: "journal.cribro.com",
+    url: "https://www.journal.cribro.pro",
+    label: "journal.cribro.pro",
     status: "live",
   },
 ];
