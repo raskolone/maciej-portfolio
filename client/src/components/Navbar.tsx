@@ -5,7 +5,7 @@
    ============================================================= */
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -21,6 +21,7 @@ export default function Navbar() {
   const { lang, toggleLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -28,10 +29,30 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Obsługuj scrollowanie po powrocie na stronę główną
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const scrollTo = params.get("scroll");
+    if (scrollTo && location === "/") {
+      setTimeout(() => {
+        const el = document.querySelector(`#${scrollTo}`);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        // Wyczyść URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }, 100);
+    }
+  }, [location]);
+
   const scrollTo = (href: string) => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    // Jeśli jesteśmy na stronie głównej, scrolluj do sekcji
+    if (location === "/") {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Jeśli jesteśmy na innej stronie, przejdź do strony głównej i scrolluj
+      window.location.href = `/?scroll=${href.substring(1)}`;
+    }
   };
 
   const navBg = scrolled
