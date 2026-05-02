@@ -227,7 +227,7 @@ export default function Apps() {
                       src="https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/og_cribro_journal_45f128b3.png"
                       alt={app.name}
                       className="w-full rounded mb-5 group-hover:opacity-90 transition-opacity"
-                      style={{ maxHeight: "120px", objectFit: "cover" }}
+                      style={{ maxHeight: "180px", objectFit: "contain", padding: "8px" }}
                     />
                   )}
 
