@@ -147,12 +147,12 @@ function LabsNavbar() {
           <span
             style={{
               fontFamily: "'DM Mono', monospace",
-              fontSize: "0.65rem",
-              letterSpacing: "0.15em",
-              fontWeight: 400,
+              fontSize: "0.85rem",
+              letterSpacing: "0.12em",
+              fontWeight: 500,
               color: "#4ade80",
               textTransform: "uppercase",
-              marginLeft: "0.1rem",
+              marginLeft: "0.05rem",
             }}
           >
             LABS
