@@ -8,12 +8,14 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
 import Apps from "./pages/Apps";
+import CribroLabs from "./pages/CribroLabs";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/apps"} component={Apps} />
+      <Route path={"/cribro"} component={CribroLabs} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
