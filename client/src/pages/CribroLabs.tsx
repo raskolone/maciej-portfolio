@@ -885,7 +885,7 @@ const PROJECTS = [
     desc: "Portal językowy do nauki angielskiego — lekcje, materiały, blog i system rezerwacji. Zbudowany w React + TypeScript z pełnym backendem.",
     tags: ["React", "TypeScript", "Node.js"],
     status: "live",
-    url: "https://cribro.pro",
+    url: "#",
   },
   {
     num: "02",
@@ -894,7 +894,7 @@ const PROJECTS = [
     desc: "Aplikacja do codziennego pisania i refleksji. Prosta, szybka, bez rozpraszaczy. Zbudowana z myślą o nawyku myślenia.",
     tags: ["React", "Tailwind", "PWA"],
     status: "live",
-    url: "https://journal.cribro.pro",
+    url: "#",
   },
   {
     num: "03",
@@ -2038,11 +2038,11 @@ function LabsFooter() {
             color: "rgba(245,245,240,0.3)",
           }}
         >
-          © {year} Maciej Wyrozumski · cribro.pro
+          © {year} Maciej Wyrozumski · cribro.pro / labs
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
           <a
-            href="https://cribro.pro"
+            href="#"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "0.78rem",
