@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Mail, Phone, Linkedin, Send, Clock } from "lucide-react";
 import { toast } from "sonner";
+import JengaBlock from "@/components/JengaBlock";
 
 export default function ContactSection() {
   const { t } = useLanguage();
@@ -73,7 +74,10 @@ export default function ContactSection() {
         <div className="grid lg:grid-cols-12 gap-12">
 
           {/* Left: heading + contact info */}
-          <div className="lg:col-span-4">
+          <JengaBlock
+            delay={0.1}
+            className="lg:col-span-4"
+          >
             <div className="relative mb-8">
               <span className="deco-number">07</span>
               <p className="section-label mb-3">{t("Kontakt", "Contact")}</p>
@@ -130,10 +134,13 @@ export default function ContactSection() {
                 {t("Odpowiadam zwykle w ciągu 24h", "I usually reply within 24h")}
               </div>
             </div>
-          </div>
+          </JengaBlock>
 
           {/* Right: form */}
-          <div className="lg:col-span-8">
+          <JengaBlock
+            delay={0.2}
+            className="lg:col-span-8"
+          >
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
@@ -257,7 +264,7 @@ export default function ContactSection() {
                 )}
               </button>
             </form>
-          </div>
+          </JengaBlock>
         </div>
       </div>
     </section>

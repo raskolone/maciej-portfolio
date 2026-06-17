@@ -5,6 +5,7 @@
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ExternalLink, Github } from "lucide-react";
+import JengaBlock from "@/components/JengaBlock";
 
 const SELAVIE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/selavie-project-card-TyxKqPBFcBnZhRA5rrNPkP.webp";
 
@@ -96,11 +97,12 @@ export default function ProjectsSection() {
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => {
+          {projects.map((project, i) => {
             const status = statusConfig[project.status];
             return (
-              <div
+              <JengaBlock
                 key={project.id}
+                delay={i * 0.1}
                 className="card-hover rounded-lg overflow-hidden bg-card flex flex-col"
               >
                 {/* Image */}
@@ -186,7 +188,7 @@ export default function ProjectsSection() {
                     </div>
                   )}
                 </div>
-              </div>
+              </JengaBlock>
             );
           })}
         </div>

@@ -3,8 +3,8 @@
    Personal, warm, short biography
    ============================================================= */
 
-import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import JengaBlock from "@/components/JengaBlock";
 
 const PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-photo-editorial_4c075e9b.png";
 
@@ -16,30 +16,9 @@ const stats = [
 
 export default function AboutSection() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-about").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 120);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 bg-background">
+    <section id="about" className="py-24 bg-background">
       <div className="container">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
 
@@ -58,9 +37,9 @@ export default function AboutSection() {
             </div>
 
             {/* Stats */}
-            <div
-              className="reveal-about grid grid-cols-3 lg:grid-cols-1 gap-4 mt-8"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+            <JengaBlock
+              delay={0.1}
+              className="grid grid-cols-3 lg:grid-cols-1 gap-4 mt-8"
             >
               {stats.map((stat) => (
                 <div key={stat.num} className="border-l-2 border-primary pl-4 py-1">
@@ -75,7 +54,7 @@ export default function AboutSection() {
                   </p>
                 </div>
               ))}
-            </div>
+            </JengaBlock>
 
 
           </div>
@@ -84,12 +63,10 @@ export default function AboutSection() {
           <div className="lg:col-span-8">
             <div className="space-y-6">
               {/* Photo inline — float right, rozmiar jednego akapitu */}
-              <div
-                className="reveal-about float-right ml-6 mb-4 hidden sm:block"
+              <JengaBlock
+                delay={0.2}
+                className="float-right ml-6 mb-4 hidden sm:block"
                 style={{
-                  opacity: 0,
-                  transform: "translateY(16px)",
-                  transition: "opacity 0.5s ease, transform 0.5s ease",
                   width: "160px",
                   flexShrink: 0,
                 }}
@@ -111,46 +88,37 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              <div
-                className="reveal-about"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
-              >
+              <JengaBlock delay={0.3}>
                 <p className="text-base text-foreground leading-relaxed">
                   {t(
                     "Jestem lektorem języka angielskiego i absolwentem filologii angielskiej. Od ponad 10 lat pracuję z młodzieżą, studentami i dorosłymi — od poziomu A1 aż po C1. Przez lata byłem współwłaścicielem i managerem szkoły językowej, gdzie nadzorowałem pracę zespołu lektorów i dbałem o jakość metodyczną zajęć.",
                     "I am an English language tutor and graduate of English philology. For over 10 years I have worked with teenagers, students, and adults — from A1 all the way to C1. For years I co-owned and managed a language school, where I supervised a team of tutors and ensured the methodological quality of lessons."
                   )}
                 </p>
-              </div>
+              </JengaBlock>
 
-              <div
-                className="reveal-about"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
-              >
+              <JengaBlock delay={0.4}>
                 <p className="text-base text-muted-foreground leading-relaxed">
                   {t(
                     "Na moich zajęciach stawiam na mówienie, osłuchanie z językiem i poprawną wymowę. Fonetyka to moja pasja — pracowałem jako Pronunciation Coach, pomagając klientom nie tylko mówić poprawnie, ale brzmieć naturalnie i pewnie. Zależy mi, żeby nauka była uporządkowana, praktyczna i bez zbędnego stresu.",
                     "In my lessons, I focus on speaking, language exposure, and correct pronunciation. Phonetics is my passion — I have worked as a Pronunciation Coach, helping clients not only speak correctly but sound natural and confident. I care about learning being organized, practical, and free from unnecessary stress."
                   )}
                 </p>
-              </div>
+              </JengaBlock>
 
-              <div
-                className="reveal-about"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
-              >
+              <JengaBlock delay={0.5}>
                 <p className="text-base text-muted-foreground leading-relaxed">
                   {t(
                     "Jestem ADHD. Wiem, jak uczy się mózg, który nie znosi nudy, chaosu i przeciążenia informacją. Dlatego moje zajęcia są zbudowane inaczej — mniej materiału, więcej sensu. Krótkie bloki, jasna struktura, zero zbędnego szumu. Uczę tak, jak sam chciałbym być uczony.",
                     "I have ADHD. I know how a brain learns when it can't stand boredom, chaos, or information overload. That's why my lessons are built differently — less material, more meaning. Short blocks, clear structure, zero unnecessary noise. I teach the way I'd want to be taught."
                   )}
                 </p>
-              </div>
+              </JengaBlock>
 
               {/* Philosophy block */}
-              <div
-                className="reveal-about border-l-2 border-primary/40 pl-5 py-2"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              <JengaBlock
+                delay={0.6}
+                className="border-l-2 border-primary/40 pl-5 py-2"
               >
                 <p
                   className="text-base text-foreground font-medium leading-relaxed italic"
@@ -171,14 +139,14 @@ export default function AboutSection() {
 
 
               {/* Tags */}
-              <div
-                className="reveal-about flex flex-wrap gap-2 pt-2"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              <JengaBlock
+                delay={0.7}
+                className="flex flex-wrap gap-2 pt-2"
               >
                 {["Business English", "Pronunciation Coach", "Cambridge Exams", "CEFR A1–C1", "Full Immersion", "ADHD-Friendly", "EdTech"].map((tag) => (
                   <span key={tag} className="tag-green">{tag}</span>
                 ))}
-              </div>
+              </JengaBlock>
             </div>
           </div>
         </div>

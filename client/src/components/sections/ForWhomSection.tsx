@@ -3,9 +3,9 @@
    Cards grid showing target groups
    ============================================================= */
 
-import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Briefcase, GraduationCap, Users, Globe, BookOpen, Mic, Brain } from "lucide-react";
+import JengaBlock from "@/components/JengaBlock";
 
 const groups = [
   {
@@ -47,30 +47,9 @@ const groups = [
 
 export default function ForWhomSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-card").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 80);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <section id="for-whom" ref={sectionRef} className="py-24 bg-card/30">
+    <section id="for-whom" className="py-24 bg-card/30">
       <div className="container">
         <div className="relative mb-14">
           <span className="deco-number">02</span>
@@ -91,14 +70,14 @@ export default function ForWhomSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {groups.map((group) => {
+          {groups.map((group, i) => {
             const data = lang === "pl" ? group.pl : group.en;
             const Icon = group.icon;
             return (
-              <div
+              <JengaBlock
                 key={group.pl.title}
-                className="reveal-card card-glow bg-card rounded-sm p-6 border border-border/60"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                delay={i * 0.1}
+                className="card-glow bg-card rounded-sm p-6 border border-border/60"
               >
                 <div className="w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center mb-4">
                   <Icon size={18} className="text-primary" />
@@ -112,7 +91,7 @@ export default function ForWhomSection() {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {data.desc}
                 </p>
-              </div>
+              </JengaBlock>
             );
           })}
         </div>

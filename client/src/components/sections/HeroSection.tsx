@@ -7,6 +7,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import ConstellationCanvas from "@/components/ConstellationCanvas";
 import TypewriterText from "@/components/TypewriterText";
+import JengaBlock from "@/components/JengaBlock";
 
 const AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-avatar_f2b22a3b.png";
 
@@ -37,10 +38,7 @@ export default function HeroSection() {
       <div className="relative z-10 flex flex-col items-center text-center px-4 pt-16">
 
         {/* Avatar */}
-        <div
-          className="animate-fade-in mb-6"
-          style={{ opacity: 0, animationFillMode: "forwards" }}
-        >
+        <JengaBlock delay={0.1} className="mb-6">
           <div className="relative">
             <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-primary/50 animate-glow-pulse">
               <img
@@ -52,13 +50,10 @@ export default function HeroSection() {
             {/* Status dot */}
             <div className="absolute bottom-1 right-1 glow-dot" />
           </div>
-        </div>
+        </JengaBlock>
 
         {/* Name */}
-        <div
-          className="animate-fade-in-up mb-2"
-          style={{ opacity: 0, animationDelay: "0.25s", animationFillMode: "forwards" }}
-        >
+        <JengaBlock delay={0.2} className="mb-2">
           <h1
             className="text-6xl md:text-8xl font-bold text-foreground leading-none tracking-tight"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -71,35 +66,28 @@ export default function HeroSection() {
           >
             Wyrozumski
           </p>
-        </div>
+        </JengaBlock>
 
         {/* Typewriter subtitle */}
-        <div
-          className="animate-fade-in-up mb-5 h-8"
-          style={{ opacity: 0, animationDelay: "0.45s", animationFillMode: "forwards" }}
-        >
+        <JengaBlock delay={0.3} className="mb-5 h-8">
           <TypewriterText
             phrases={phrases}
             className="text-lg md:text-xl font-semibold text-primary"
           />
-        </div>
+        </JengaBlock>
 
         {/* Description */}
-        <p
-          className="animate-fade-in-up text-sm md:text-base text-muted-foreground leading-relaxed mb-8 max-w-lg"
-          style={{ opacity: 0, animationDelay: "0.6s", animationFillMode: "forwards", fontFamily: "'DM Sans', sans-serif" }}
-        >
-          {t(
-            "10 lat doświadczenia w nauczaniu angielskiego. Specjalizacja: fonetyka, Business English, full immersion. Online i w Bielsku-Białej.",
-            "10 years of experience teaching English. Specialization: phonetics, Business English, full immersion. Online and in Bielsko-Biała."
-          )}
-        </p>
+        <JengaBlock delay={0.4} className="mb-8 max-w-lg">
+          <p className="text-sm md:text-base text-muted-foreground leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            {t(
+              "10 lat doświadczenia w nauczaniu angielskiego. Specjalizacja: fonetyka, Business English, full immersion. Online i w Bielsku-Białej.",
+              "10 years of experience teaching English. Specialization: phonetics, Business English, full immersion. Online and in Bielsko-Biała."
+            )}
+          </p>
+        </JengaBlock>
 
         {/* CTA buttons */}
-        <div
-          className="animate-fade-in-up flex flex-col sm:flex-row gap-3 mb-12"
-          style={{ opacity: 0, animationDelay: "0.75s", animationFillMode: "forwards" }}
-        >
+        <JengaBlock delay={0.5} className="flex flex-col sm:flex-row gap-3 mb-12">
           <a
             href="https://calendly.com/maciej-wyrozumski/30min"
             target="_blank"
@@ -115,12 +103,12 @@ export default function HeroSection() {
           >
             {t("Poznaj mnie", "About me")}
           </a>
-        </div>
+        </JengaBlock>
 
         {/* Proof stats */}
-        <div
-          className="animate-fade-in flex flex-wrap justify-center gap-x-8 gap-y-3"
-          style={{ opacity: 0, animationDelay: "0.9s", animationFillMode: "forwards" }}
+        <JengaBlock
+          delay={0.6}
+          className="flex flex-wrap justify-center gap-x-8 gap-y-3"
         >
           {[
             { num: "10+", label: t("lat doświadczenia", "years experience") },
@@ -139,12 +127,12 @@ export default function HeroSection() {
               </span>
             </div>
           ))}
-        </div>
+        </JengaBlock>
 
         {/* Tagline + CribroEnglish brand */}
-        <div
-          className="animate-fade-in mt-10 mb-6 flex flex-col items-center gap-2"
-          style={{ opacity: 0, animationDelay: "1.1s", animationFillMode: "forwards" }}
+        <JengaBlock
+          delay={0.7}
+          className="mt-10 mb-6 flex flex-col items-center gap-2"
         >
           <div className="flex items-center gap-2">
             <div className="h-px w-8 bg-primary/40" />
@@ -162,7 +150,7 @@ export default function HeroSection() {
           >
             CribroEnglish
           </span>
-        </div>
+        </JengaBlock>
       </div>
     </section>
   );

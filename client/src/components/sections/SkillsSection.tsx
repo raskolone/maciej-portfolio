@@ -4,6 +4,7 @@
    ============================================================= */
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import JengaBlock from "@/components/JengaBlock";
 
 const itSkills = [
   { name: "Python", level: 55, note: { pl: "Rozumiem składnię, buduję z AI", en: "Understand syntax, build with AI" } },
@@ -103,14 +104,15 @@ export default function SkillsSection() {
               </h3>
             </div>
             <div className="space-y-6">
-              {itSkills.map((skill) => (
-                <SkillBar
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                  note={lang === "pl" ? skill.note.pl : skill.note.en}
-                  color="green"
-                />
+              {itSkills.map((skill, i) => (
+                <JengaBlock key={skill.name} delay={i * 0.05}>
+                  <SkillBar
+                    name={skill.name}
+                    level={skill.level}
+                    note={lang === "pl" ? skill.note.pl : skill.note.en}
+                    color="green"
+                  />
+                </JengaBlock>
               ))}
             </div>
 
@@ -135,14 +137,15 @@ export default function SkillsSection() {
               </h3>
             </div>
             <div className="space-y-6">
-              {langSkills.map((skill) => (
-                <SkillBar
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                  note={lang === "pl" ? skill.note.pl : skill.note.en}
-                  color="amber"
-                />
+              {langSkills.map((skill, i) => (
+                <JengaBlock key={skill.name} delay={i * 0.05}>
+                  <SkillBar
+                    name={skill.name}
+                    level={skill.level}
+                    note={lang === "pl" ? skill.note.pl : skill.note.en}
+                    color="amber"
+                  />
+                </JengaBlock>
               ))}
             </div>
 

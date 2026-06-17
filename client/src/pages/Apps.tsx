@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ExternalLink } from "lucide-react";
+import JengaBlock from "@/components/JengaBlock";
 
 const apps = [
   {
@@ -185,18 +186,18 @@ export default function Apps() {
 
             {/* Right: App card (Cribro Journal) */}
             <div className="flex flex-col gap-6">
-              {apps.map((app) => (
-                <a
-                  key={app.id}
-                  href={app.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block border border-border hover:border-primary/50 transition-all duration-300 p-6"
-                  style={{
-                    borderRadius: "2px",
-                    background: "oklch(0.13 0.015 240 / 0.6)",
-                  }}
-                >
+              {apps.map((app, i) => (
+                <JengaBlock key={app.id} delay={i * 0.1}>
+                  <a
+                    href={app.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block border border-border hover:border-primary/50 transition-all duration-300 p-6"
+                    style={{
+                      borderRadius: "2px",
+                      background: "oklch(0.13 0.015 240 / 0.6)",
+                    }}
+                  >
                   {/* Status badge */}
                   <div className="flex items-center justify-between mb-4">
                     <span
@@ -241,7 +242,8 @@ export default function Apps() {
                     <ExternalLink size={12} />
                     {app.label}
                   </div>
-                </a>
+                </a >
+                </JengaBlock>
               ))}
             </div>
           </div>

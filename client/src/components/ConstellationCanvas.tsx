@@ -22,7 +22,7 @@ export default function ConstellationCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
   const starsRef = useRef<Star[]>([]);
-  const mouseRef = useRef({ x: -9999, y: -9999 });
+  // const mouseRef = useRef({ x: -9999, y: -9999 });
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -51,11 +51,11 @@ export default function ConstellationCanvas() {
     resize();
     window.addEventListener("resize", resize);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    };
-    window.addEventListener("mousemove", handleMouseMove);
+    // const handleMouseMove = (e: MouseEvent) => {
+    //   const rect = canvas.getBoundingClientRect();
+    //   mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    // };
+    // window.addEventListener("mousemove", handleMouseMove);
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -82,21 +82,7 @@ export default function ConstellationCanvas() {
           }
         }
 
-        // Mouse connections — bright green
-        const mdx = stars[i].x - mouseRef.current.x;
-        const mdy = stars[i].y - mouseRef.current.y;
-        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mdist < MOUSE_DIST) {
-          const alpha = (1 - mdist / MOUSE_DIST) * 0.75;
-          ctx.beginPath();
-          ctx.moveTo(stars[i].x, stars[i].y);
-          ctx.lineTo(mouseRef.current.x, mouseRef.current.y);
-          ctx.strokeStyle = isDark
-            ? `rgba(100, 230, 140, ${alpha})`
-            : `rgba(20, 110, 50, ${alpha})`;
-          ctx.lineWidth = 1.1;
-          ctx.stroke();
-        }
+        // Mouse connections removed for "less noise" strategy
       }
 
       // Draw stars
@@ -144,7 +130,7 @@ export default function ConstellationCanvas() {
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouseMove);
+      // window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [theme]);
 

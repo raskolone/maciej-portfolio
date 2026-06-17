@@ -4,35 +4,14 @@
    Positioned between About and Method sections
    ============================================================= */
 
-import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import JengaBlock from "@/components/JengaBlock";
 
 export default function MyStorySection() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-story").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 150);
-            });
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <section id="my-story" ref={sectionRef} className="py-24 bg-background relative overflow-hidden">
+    <section id="my-story" className="py-24 bg-background relative overflow-hidden">
 
       {/* Subtle background glow */}
       <div
@@ -46,9 +25,9 @@ export default function MyStorySection() {
         <div className="max-w-3xl mx-auto">
 
           {/* Section label */}
-          <div
-            className="reveal-story mb-10"
-            style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+          <JengaBlock
+            delay={0.1}
+            className="mb-10"
           >
             <p className="section-label mb-3">{t("Moja historia", "My Story")}</p>
             <h2
@@ -66,34 +45,27 @@ export default function MyStorySection() {
           {/* Story paragraphs */}
           <div className="space-y-7">
 
-            <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-            >
+            <JengaBlock delay={0.2}>
               <p className="text-base text-foreground leading-relaxed">
                 {t(
                   "Znam to uczucie, kiedy wieża się wali. Kiedy wyciągasz jeden klocek za dużo i całość leci w dół — głośno, chaotycznie, bez ostrzeżenia. Przez lata mierzyłem się z trudnościami zdrowotnymi, psychicznymi i emocjonalnymi, które sprawiały, że musiałem uczyć się układać swoje życie od nowa. Nie raz. Kilka razy.",
                   "I know that feeling — when the tower falls. When you pull one block too many and everything crashes down — loudly, chaotically, without warning. For years I faced health, mental, and emotional challenges that forced me to learn how to rebuild my life from scratch. Not once. Several times."
                 )}
               </p>
-            </div>
+            </JengaBlock>
 
-            <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-            >
+            <JengaBlock delay={0.3}>
               <p className="text-base text-muted-foreground leading-relaxed">
                 {t(
                   "ADHD to nie wymówka. To rzeczywistość, z którą żyję każdego dnia. Mózg, który myśli szybciej niż mówi, gubi wątki, skacze między pomysłami i nie znosi chaosu — a jednocześnie potrafi skupić się z laserową precyzją na tym, co go naprawdę pochłania. Nauczyłem się z tym pracować, nie walczyć.",
                   "ADHD is not an excuse. It's a reality I live with every day. A brain that thinks faster than it speaks, loses threads, jumps between ideas, and can't stand chaos — yet can focus with laser precision on what truly absorbs it. I learned to work with it, not against it."
                 )}
               </p>
-            </div>
+            </JengaBlock>
 
             {/* Jenga quote block */}
-            <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+            <JengaBlock
+              delay={0.4}
             >
               <div className="relative pl-6 py-4 border-l-2 border-primary/50">
                 <div className="absolute -left-1 top-4 w-2 h-2 rounded-full bg-primary/60" />
@@ -109,22 +81,19 @@ export default function MyStorySection() {
               </div>
             </div>
 
-            <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-            >
+            <JengaBlock delay={0.5}>
               <p className="text-base text-muted-foreground leading-relaxed">
                 {t(
                   "Dziś uczę angielskiego — i robię to z pełną świadomością, że po drugiej stronie ekranu często siedzi ktoś, kto też walczy. Z brakiem pewności siebie, z chaosem w głowie, z poczuciem, że jest za późno albo za trudno. Dlatego nie uczę tylko języka. Uczę systemu. Małych kroków. Konsekwencji, która daje efekty.",
                   "Today I teach English — and I do it with full awareness that on the other side of the screen there's often someone who is also struggling. With lack of confidence, with chaos in their head, with the feeling that it's too late or too hard. That's why I don't just teach language. I teach a system. Small steps. Consistency that delivers results."
                 )}
               </p>
-            </div>
+            </JengaBlock>
 
             {/* Three pillars */}
-            <div
-              className="reveal-story grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+            <JengaBlock
+              delay={0.6}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4"
             >
               {[
                 {
@@ -158,7 +127,7 @@ export default function MyStorySection() {
                   </div>
                 );
               })}
-            </div>
+            </JengaBlock>
 
           </div>
         </div>

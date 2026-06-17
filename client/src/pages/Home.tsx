@@ -13,6 +13,7 @@ import MyStorySection from "@/components/sections/MyStorySection";
 import PricingSection from "@/components/sections/PricingSection";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
+import JengaSection from "@/components/JengaSection";
 
 export default function Home() {
   return (
@@ -20,13 +21,27 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <ForWhomSection />
-        <MethodSection />
-        <AboutSection />
-        <MyStorySection />
-        <PricingSection />
-        <FAQSection />
-        <ContactSection />
+        <JengaSection id="for-whom">
+          <ForWhomSection />
+        </JengaSection>
+        <JengaSection id="method">
+          <MethodSection />
+        </JengaSection>
+        <JengaSection id="about">
+          <AboutSection />
+        </JengaSection>
+        <JengaSection id="story">
+          <MyStorySection />
+        </JengaSection>
+        <JengaSection id="pricing">
+          <PricingSection />
+        </JengaSection>
+        <JengaSection id="faq">
+          <FAQSection />
+        </JengaSection>
+        <JengaSection id="contact">
+          <ContactSection />
+        </JengaSection>
       </main>
       <Footer />
     </div>

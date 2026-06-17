@@ -6,6 +6,7 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ChevronDown } from "lucide-react";
+import JengaBlock from "@/components/JengaBlock";
 
 const faqs = [
   {
@@ -133,8 +134,9 @@ export default function FAQSection() {
                 const data = lang === "pl" ? faq.pl : faq.en;
                 const isOpen = openIndex === i;
                 return (
-                  <div
+                  <JengaBlock
                     key={i}
+                    delay={i * 0.05}
                     className="border border-border/60 rounded-sm overflow-hidden bg-card/80"
                   >
                     <button
@@ -159,7 +161,7 @@ export default function FAQSection() {
                         </p>
                       </div>
                     )}
-                  </div>
+                  </JengaBlock>
                 );
               })}
             </div>

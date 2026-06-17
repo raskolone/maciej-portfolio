@@ -3,8 +3,8 @@
    4 pillars of teaching method, asymmetric layout
    ============================================================= */
 
-import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import JengaBlock from "@/components/JengaBlock";
 
 const ABOUT_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663586786146/TAFunkDrFdD3zZyACdoLmY/about-bg-TaevRFcopD2KaKEpjanKkc.webp";
 
@@ -38,30 +38,9 @@ const pillars = [
 
 export default function MethodSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-pillar").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateX(0)";
-              }, i * 100);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <section id="method" ref={sectionRef} className="py-24 bg-card/20">
+    <section id="method" className="py-24 bg-card/20">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
 
@@ -109,13 +88,13 @@ export default function MethodSection() {
             </div>
 
             <div className="space-y-6">
-              {pillars.map((pillar) => {
+              {pillars.map((pillar, i) => {
                 const data = lang === "pl" ? pillar.pl : pillar.en;
                 return (
-                  <div
+                  <JengaBlock
                     key={pillar.num}
-                    className="reveal-pillar flex gap-5 group"
-                    style={{ opacity: 0, transform: "translateX(-16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                    delay={i * 0.1}
+                    className="flex gap-5 group"
                   >
                     <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <span
@@ -136,7 +115,7 @@ export default function MethodSection() {
                         {data.desc}
                       </p>
                     </div>
-                  </div>
+                  </JengaBlock>
                 );
               })}
             </div>
